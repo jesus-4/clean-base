@@ -1,14 +1,12 @@
 package curso.usecase;
 
 import curso.modelo.Course;
-import curso.modelo.Level;
+import curso.output.Persistence;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.UUID;
 
-public class PersistenceCourses implements Persistence{
-    private static ArrayList<Course> courses = new ArrayList<>();
+public class PersistenceCourses implements Persistence {
+    private ArrayList<Course> courses = new ArrayList<>();
     @Override
     public void saveCourse(Course course) {
         courses.add(course);

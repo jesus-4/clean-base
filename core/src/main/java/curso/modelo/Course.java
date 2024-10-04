@@ -18,11 +18,15 @@ public class Course {
     }
 
     public static Course Instance(UUID id, String name, LocalDate inscriptionDate, Level level) throws ExceptionCourse {
-      if (LocalDate.now().isAfter(inscriptionDate)) {
+
+      if (inscriptionDate == null || LocalDate.now().isAfter(inscriptionDate)) {
           throw new ExceptionCourse("La fecha es anterior al dia de hoy");
       }
       if (name == null || name.isEmpty()) {
           throw new ExceptionCourse("Error al Ingresar nombre");
+      }
+      if (id == null) {
+          throw new ExceptionCourse("Error al ingresar el id");
       }
         return new Course(id, name, inscriptionDate, level);
     }

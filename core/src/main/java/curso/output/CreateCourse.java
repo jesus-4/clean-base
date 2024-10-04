@@ -1,4 +1,4 @@
-package curso.input;
+package curso.output;
 
 import curso.modelo.Level;
 

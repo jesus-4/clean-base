@@ -1,9 +1,6 @@
-package curso.usecase;
+package curso.output;
 
 import curso.modelo.Course;
-import curso.modelo.Level;
-import java.time.LocalDate;
-import java.util.UUID;
 
 public interface Persistence {
     void saveCourse(Course course);
