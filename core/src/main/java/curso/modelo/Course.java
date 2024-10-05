@@ -34,4 +34,7 @@ public class Course {
     public String getName() {
         return name;
     }
+    public Level getLevel() {
+        return level;
+    }
 }

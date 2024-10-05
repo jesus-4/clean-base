@@ -17,12 +17,12 @@ public class RegisterCourse implements CreateCourse {
     }
 
     @Override
-    public void createCourse (UUID id, String name, LocalDate date, Level lvl) throws ExceptionCourse {
+    public boolean createCourse (UUID id, String name, LocalDate date, Level lvl) throws ExceptionCourse {
         Course c = Course.Instance(id, name, date,lvl);
 
         if (persistence.searchCourse(c.getName())) {
-            throw new ExceptionCourse("Ya existe curso con ese nombre ");
+            throw new ExceptionCourse("Ya existe curso con ese nombre");
         }
-        persistence.saveCourse(c);
+        return persistence.saveCourse(c);
         }
     }
