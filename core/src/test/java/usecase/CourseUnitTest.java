@@ -1,18 +1,16 @@
-package model;
+package usecase;
 
 import curso.exception.ExceptionCourse;
 import curso.modelo.Course;
 import curso.modelo.Level;
 import curso.usecase.PersistenceCourses;
 import curso.input.RegisterCourse;
-import curso.output.Persistence;
+import curso.usecase.Persistence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -48,22 +46,25 @@ public class CourseUnitTest {
 
         registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado);
 
-        Assertions.assertTrue(persistence.searchCourse("Matematicas"));
+        Assertions.assertTrue(persistence.existCourse("Matematicas"));
     }
 
     @Test
     public void uploadCourse_Fail(){
-        when(persistence.searchCourse("Matematicas")).thenReturn(true);
-        ExceptionCourse ex = Assertions.assertThrows(ExceptionCourse.class, () ->registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado));
-        Assertions.assertEquals("Ya existe curso con ese nombre", ex.getMessage());
+        when(persistence.existCourse("Matematicas")).thenReturn(true);
+//        ExceptionCourse ex = Assertions.assertThrows(ExceptionCourse.class, () ->registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado));
+        ExceptionCourse exception= Assertions.assertThrows(ExceptionCourse.class, () -> registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado));
+        Assertions.assertEquals("Ya existe curso con ese nombre", exception.getMessage());
+//        Assertions.assertEquals("Ya existe curso con ese nombre", ex.getMessage());
     }
 
     @Test
     public void CourseExistTest() throws Exception {
-        when(persistence.searchCourse("Matematicas")).thenReturn(true);
-        boolean esperado = persistence.searchCourse("Matematicas");
+        when(persistence.existCourse("Matematicas")).thenReturn(true);
+        boolean esperado = persistence.existCourse("Matematicas");
         Assertions.assertTrue(esperado);
-        verify(persistence,times(1)).searchCourse("Matematicas");
+
+        verify(persistence,times(1)).existCourse("Matematicas");
     }
 
 }

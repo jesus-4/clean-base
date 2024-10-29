@@ -37,4 +37,10 @@ public class Course {
     public Level getLevel() {
         return level;
     }
+    public LocalDate getInscriptionDate() {
+        return inscriptionDate;
+    }
+    public UUID getId() {
+        return id;
+    }
 }

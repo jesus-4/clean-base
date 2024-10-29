@@ -1,4 +1,4 @@
-package curso.output;
+package curso.usecase;
 
 import curso.modelo.Level;
 
