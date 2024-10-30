@@ -9,7 +9,7 @@ public class Mapper {
         return Course.Instance(course.getId(),course.getName(),course.getInscriptionDate(), course.getLevel());
     }
     public static CourseData dataModelMapper(Course course)  {
-        return new CourseData(course.getId(),course.getName(),course.getInscriptionDate(), course.getLevel());
+        return  CourseData.fromDomain(course);
     }
 
 }

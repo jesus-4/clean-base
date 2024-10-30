@@ -1,7 +1,6 @@
-package ar.edu.undec.adapter.data.bootstrap;
+package ar.edu.undec.adapter.data.controller;
 
 import ar.edu.undec.adapter.data.entity.CourseDTO;
-import ar.edu.undec.adapter.data.mapper.Mapper;
 import curso.exception.ExceptionCourse;
 import curso.usecase.CreateCourse;
 import curso.usecase.Persistence;
@@ -14,17 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/course")
 public class CreateCourseController {
 
-    private Persistence persistence;
     private CreateCourse createCourse;
 
-    @Autowired
-    public CreateCourseController(Persistence persistence, CreateCourse createCourse) {
-        this.persistence = persistence;
+    public CreateCourseController(@Qualifier("registerCourse") CreateCourse createCourse) {
         this.createCourse = createCourse;
     }
 
     @PostMapping
-    public ResponseEntity<?> createCourse (@RequestBody CourseDTO course) throws Exception {
+    public ResponseEntity<?> createCourse (@RequestBody CourseDTO course) throws ExceptionCourse {
         if (this.createCourse.createCourse(
                     course.getId(),
                     course.getName(),
@@ -37,5 +33,3 @@ public class CreateCourseController {
             return ResponseEntity.badRequest().build();
         }
     }
-
-}

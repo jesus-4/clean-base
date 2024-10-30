@@ -9,12 +9,6 @@ import java.util.stream.Collectors;
 public class PersistenceCourses implements Persistence {
     private ArrayList<Course> courses = new ArrayList<>();
 
-    private final Persistence createCourse;
-
-    public PersistenceCourses(Persistence createCourse) {
-        this.createCourse = createCourse;
-    }
-
     @Override
     public boolean saveCourse(Course course) {
         return courses.add(course);

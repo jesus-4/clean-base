@@ -1,5 +1,6 @@
 package ar.edu.undec.adapter.data.entity;
 
+import curso.modelo.Course;
 import curso.modelo.Level;
 import jakarta.persistence.*;
 
@@ -19,11 +20,9 @@ public class CourseData {
     @Column(name = "nivel")
     private Level level;
 
-//    @OneToMany
-//    private InscriptionData inscription;
     public CourseData() {}
 
-    public CourseData(UUID id, String name, LocalDate inscriptionDate, Level level) {
+    private CourseData(UUID id, String name, LocalDate inscriptionDate, Level level) {
         this.id = id;
         this.name = name;
         this.inscriptionDate = inscriptionDate;
@@ -65,7 +64,7 @@ public class CourseData {
         this.level = level;
         return this;
     }
-    public static CourseData fromDomain(CourseData courseData){
+    public static CourseData fromDomain(Course courseData){
         return new CourseData(courseData.getId(), courseData.getName(), courseData.getInscriptionDate(), courseData.getLevel());
     }
 }
