@@ -21,15 +21,17 @@ public class CreateCourseController {
 
     @PostMapping
     public ResponseEntity<?> createCourse (@RequestBody CourseDTO course) throws ExceptionCourse {
-        if (this.createCourse.createCourse(
-                    course.getId(),
-                    course.getName(),
-                    course.getDescription(),
-                    course.getLevel())) {
+        try {
+            if (this.createCourse.createCourse(course.getId(), course.getName(),
+                    course.getDescription(), course.getLevel())) {
 
                 return ResponseEntity.ok().build();
+            }else {
+                return ResponseEntity.badRequest().body("No se pudo crear el curso");
             }
-
-            return ResponseEntity.badRequest().build();
+        }catch(ExceptionCourse ex) {
+            return ResponseEntity.badRequest().body("Error " + ex.getMessage());
         }
+
     }
+}

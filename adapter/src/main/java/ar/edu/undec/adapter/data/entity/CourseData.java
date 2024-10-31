@@ -11,7 +11,6 @@ import java.util.UUID;
 @Table(name = "Course")
 public class CourseData {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private UUID id;
     @Column(name = "nombre")
     private String name;

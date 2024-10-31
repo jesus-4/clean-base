@@ -13,7 +13,7 @@ public class CourseDTO {
     private UUID id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("Inscription_deadLine")
+    @JsonProperty("inscription_deadline")
     private LocalDate description;
     @JsonProperty("level")
     private Level level;
