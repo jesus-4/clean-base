@@ -18,13 +18,11 @@ import java.util.ArrayList;
 @Repository
 public class CreateCourseRepository implements Persistence{
 
-    private final ConversionService conversionService;
     private CreateCourseCRUD createCourseCRUD;
 
     @Autowired
-    CreateCourseRepository(CreateCourseCRUD createCourseCRUD, @Qualifier("conversionService") ConversionService conversionService) {
+    CreateCourseRepository(CreateCourseCRUD createCourseCRUD) {
         this.createCourseCRUD = createCourseCRUD;
-        this.conversionService = conversionService;
     }
 
     @Override
