@@ -22,16 +22,14 @@ public class CreateCourseController {
     @PostMapping
     public ResponseEntity<?> createCourse (@RequestBody CourseDTO course) throws ExceptionCourse {
         try {
-            if (this.createCourse.createCourse(course.getId(), course.getName(),
-                    course.getDescription(), course.getLevel())) {
-
-                return ResponseEntity.ok().build();
-            }else {
-                return ResponseEntity.badRequest().body("No se pudo crear el curso");
-            }
+            boolean result = this.createCourse.createCourse(
+                    course.getId(),
+                    course.getName(),
+                    course.getDescription(),
+                    course.getLevel());
+            return result ? ResponseEntity.ok().build() : ResponseEntity.internalServerError().build();
         }catch(ExceptionCourse ex) {
-            return ResponseEntity.badRequest().body("Error " + ex.getMessage());
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
-
     }
 }

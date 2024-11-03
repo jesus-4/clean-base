@@ -63,7 +63,7 @@ public class CourseData {
         this.level = level;
         return this;
     }
-    public static CourseData fromDomain(Course courseData){
-        return new CourseData(courseData.getId(), courseData.getName(), courseData.getInscriptionDate(), courseData.getLevel());
+    public static CourseData fromDomain(Course course){
+        return new CourseData(course.getId(), course.getName(), course.getInscriptionDate(), course.getLevel());
     }
 }

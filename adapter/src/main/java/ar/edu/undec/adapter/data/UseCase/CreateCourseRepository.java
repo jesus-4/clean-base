@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @Repository
 public class CreateCourseRepository implements Persistence{
 
-    private CreateCourseCRUD createCourseCRUD;
+    private final CreateCourseCRUD createCourseCRUD;
 
     @Autowired
     CreateCourseRepository(CreateCourseCRUD createCourseCRUD) {
@@ -26,9 +26,14 @@ public class CreateCourseRepository implements Persistence{
     }
 
     @Override
-    public boolean saveCourse(Course course) {
+    public boolean saveCourse(Course course) throws ExceptionCourse {
+        try {
             CourseData courseData = Mapper.dataModelMapper(course);
             return createCourseCRUD.save(courseData).getId() != null;
+        }catch (RuntimeException e){
+//            throw new ExceptionCourse("Error al guardar el curso");
+            return false;
+        }
     }
 
     @Override

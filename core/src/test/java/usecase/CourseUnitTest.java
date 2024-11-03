@@ -3,7 +3,6 @@ package usecase;
 import curso.exception.ExceptionCourse;
 import curso.modelo.Course;
 import curso.modelo.Level;
-import curso.usecase.PersistenceCourses;
 import curso.input.RegisterCourse;
 import curso.usecase.Persistence;
 import org.junit.jupiter.api.Assertions;
@@ -40,23 +39,12 @@ public class CourseUnitTest {
         Assertions.assertThrows(ExceptionCourse.class, () ->registerCourse.createCourse(UUID.randomUUID(),"", LocalDate.of(2024, 11, 10), Level.Avanzado));
     }
     @Test
-//    public void uploadCourse_Assert() throws ExceptionCourse {
-//        Persistence persistence = new PersistenceCourses();
-//        RegisterCourse registerCourse = new RegisterCourse(persistence);
-//
-//        registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado);
-//
-//        Assertions.assertTrue(persistence.existCourse("Matematicas"));
-//    }
 
-    @Test
     public void uploadCourse_Fail(){
         when(persistence.existCourse("Matematicas")).thenReturn(true);
-//        ExceptionCourse ex = Assertions.assertThrows(ExceptionCourse.class, () ->registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado));
-        ExceptionCourse exception= Assertions.assertThrows(ExceptionCourse.class, () -> registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado));
+ExceptionCourse exception= Assertions.assertThrows(ExceptionCourse.class, () -> registerCourse.createCourse(UUID.randomUUID(),"Matematicas", LocalDate.of(2024, 11, 10), Level.Avanzado));
         Assertions.assertEquals("Ya existe curso con ese nombre", exception.getMessage());
-//        Assertions.assertEquals("Ya existe curso con ese nombre", ex.getMessage());
-    }
+}
 
     @Test
     public void CourseExistTest() throws Exception {
