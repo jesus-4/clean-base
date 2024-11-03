@@ -26,8 +26,12 @@ public class CreateCourseRepository implements Persistence{
     }
 
     @Override
-    public boolean saveCourse(Course course) {
+    public boolean saveCourse(Course course) throws ExceptionCourse {
             CourseData courseData = Mapper.dataModelMapper(course);
+
+//            if (createCourseCRUD.findByName(course.getName()))
+//                throw new ExceptionCourse("Course Already exist");
+
             return createCourseCRUD.save(courseData).getId() != null;
     }
 

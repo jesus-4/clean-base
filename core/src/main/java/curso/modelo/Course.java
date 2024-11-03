@@ -3,6 +3,7 @@ package curso.modelo;
 import curso.exception.ExceptionCourse;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Course {
@@ -29,6 +30,19 @@ public class Course {
           throw new ExceptionCourse("Error al ingresar el id");
       }
         return new Course(id, name, inscriptionDate, level);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(name, course.name) && Objects.equals(inscriptionDate, course.inscriptionDate) && level == course.level;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, inscriptionDate, level);
     }
 
     public String getName() {
