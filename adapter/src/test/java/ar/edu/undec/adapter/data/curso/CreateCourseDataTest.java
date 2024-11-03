@@ -31,14 +31,14 @@ public class CreateCourseDataTest {
     @Test
     public void CreateCourse_CourseSavedSuccessfully() throws ExceptionCourse {
         Course theCourse= Course.Instance(UUID.randomUUID(),"name", LocalDate.MAX, Level.Inicial);
-        when(crud.save(any(CourseData.class))).thenReturn(new CourseData());
+        when(crud.save(any(CourseData.class))).thenReturn(new CourseData().setId(UUID.randomUUID()));
         boolean result= createCourseRepository.saveCourse(theCourse);
         Assertions.assertTrue(result);
     }
     @Test
     public void saveCourse_DBException_ReturnFalse() throws ExceptionCourse {
         Course theCourse= Course.Instance(UUID.randomUUID(),"name", LocalDate.MAX, Level.Inicial);
-        when(crud.save(any(CourseData.class))).thenThrow(ExceptionCourse.class);
+        when(crud.save(any(CourseData.class))).thenThrow(RuntimeException.class);
         boolean result= createCourseRepository.saveCourse(theCourse);
         Assertions.assertFalse(result);
     }
